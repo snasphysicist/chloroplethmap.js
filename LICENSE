@@ -1,3 +1,9 @@
+NOTE: The GNU affero applied to all content in files except
+mapdata.js. Specific copyright information about the data
+in this file is available at the bottom of this notice.
+
+
+
 		     GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
 
@@ -659,3 +665,12 @@ specific requirements.
 if any, to sign a "copyright disclaimer" for the program, if necessary.
 For more information on this, and how to apply and follow the GNU AGPL, see
 <https://www.gnu.org/licenses/>.
+
+
+
+
+UK Postcode Map
+
+Contains Ordnance Survey and Royal Mail data © Crown copyright and database right, British postcode areas map (https://commons.wikimedia.org/wiki/File:British_postcode_areas_map.svg), colours modified, text modified, un-needed parts by removed snasphysicist (https://github.com/snasphysicist/), CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/legalcode).
+
+
