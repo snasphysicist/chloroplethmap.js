@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="EN-GB">
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heatmaps</title>
+</head>
+
+<body>
+
+  <script src="./mapdata.js"></script>
+  <script src="./colourmap.js"></script>
+
+  <div align="center">
+    <h1 class="heatmap-heading">UK Heat Map Generator</h1>
+  </div>
+
+  <!-- Main page content -->
+  <div class="row">
+
+    <div class="column">
+
+      <div align="center">
+        <p class="heatmap-text">
+          This is a tool to generate a heatmap of data based on UK postcodes. <br />
+          Enter your data in the below input box and hit the <i>Generate</i> button to get started. <br />
+          Data must be in one of the following formats: <br />
+          <br />
+          postcode1,value1;postcode1,value1; ... <br />
+          <br />
+          or <br />
+          <br />
+          postcode1,value1<br />
+          postcode2,value2<br />
+          ...
+        </p>
+      </div>
+
+      <div align="center">
+        <textarea class="heatmap-input" cols="40" rows="5" name="inputdata"></textarea>
+      </div>
+
+      <div align="center">
+        <button class="heatmap-button">Generate</button>
+      </div>
+
+    </div>
+
+    <div class="column">
+      <svg id="heatmap-display" width="275" height="500" viewBox="550 0 0.01   1368.581"></svg>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="row">
+    <div align="center">
+      <!-- <p class="footer">Click here for copyright information</p> -->
+      <p class="footer">
+        Contains Ordnance Survey and Royal Mail data © Crown copyright and database right, <a href="https://commons.wikimedia.org/wiki/File:British_postcode_areas_map.svg">British postcode areas map</a>, colours modified, text modified, un-needed parts by removed <a href="https://github.com/snasphysicist/">snasphysicist</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/legalcode" rel="license">CC BY-SA 3.0</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Copyright information overlay -->
+  <!--
+  <div class="modal-container">
+
+    <div class="modal-heading">
+      <h1>Copyight Information</h1>
+    </div>
+
+    <div class="modal-text">
+      <p>
+        Contains Ordnance Survey and Royal Mail data © Crown copyright and database right, <a href="https://commons.wikimedia.org/wiki/File:British_postcode_areas_map.svg">British postcode areas map</a>, colours modified, text modified, un-needed parts by removed <a href="https://github.com/snasphysicist/">snasphysicist</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/legalcode" rel="license">CC BY-SA 3.0</a>
+      </p>
+    </div>
+
+  </div>
+  -->
+
+</body>
+
+<script src="./heatmap.js"></script>
+<!-- <script src="./togglemodal.js"></script> -->
+<script src="./bindevents.js"></script>
+
+</html>
