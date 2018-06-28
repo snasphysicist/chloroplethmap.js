@@ -25,6 +25,10 @@ body {
    font-family: 'Lato', sans-serif ;
 }
 
+.close-button{
+   font-family: 'Lato', sans-serif ;
+}
+
 .row{
   display: flex ;
   justify-content: center ;
@@ -34,20 +38,49 @@ body {
   flex: 50% ;
 }
 
-.modal-container{
+.modal-outer{
   display: none ;
   position: fixed ;
-  width: 80% ;
-  height: 50% ;
-  cursor: pointer ;
+  top: 50% ;
+  left: 50% ;
+  transform: translate( -50% , -50% ) ;
+  width: 500px ;
+  max-width: 100% ;
+  height: 250px ;
+  max-height: 100% ;
+  background-color: black ;
+}
+
+.modal-inner{
+  position: relative ;
+  top: 0 ;
+  left: 0 ;
+  height: 100% ;
+  width: 100% ;
+  overflow: auto ;
 }
 
 .modal-heading{
-  align: center ;
+  text-align: center ;
   font-family: 'Lato', sans-serif ;
+  color: white ;
+}
+
+.modal-side-pad{
+  float: left ;
+  width: 10% ;
+  height: 100% ;
 }
 
 .modal-text{
-  align: center ;
+  float: left ;
+  width: 80% ;
+  text-align: center ;
   font-family: 'Lato', sans-serif ;
+  color: white ;
+}
+
+.modal-row{
+  display: flex ;
+  overflow: hidden ;
 }
