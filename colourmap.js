@@ -29,8 +29,6 @@ class ColourMap {
     //Get it by subtracting floor of it (=lowerIndex) from itself
     var remainder = (fraction*(colourMap.length-2)) - lowerIndex ;
 
-    console.log( fraction + "   " + lowerIndex + "   " + remainder ) ;
-
     //RGB components to be returned
     var rgb = [] ;
 
