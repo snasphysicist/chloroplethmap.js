@@ -66,7 +66,6 @@ function parseTextData( dataIn , plotData ) {
     //Up to this is the value we want
     //to add to this postcode region
     value = textData.slice( startIndex+1 , endIndex ) ;
-    console.log( postcode , value ) ;
     //Add the value to the plotData
     plotData[ postcode ] += Number( value ) ;
     //Get rid of the postcode/value pair
