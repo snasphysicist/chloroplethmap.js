@@ -7,7 +7,7 @@ const HEATMAP_DISPLAY = document.querySelector( "#heatmap-display" ) ;
 //object with the right postcodes for the UK
 //from a mapData object
 function setupPostcodes( plotData , mapData ) {
-  var postcodes = mapData.getAllPostcodes() ;
+  var postcodes = mapData.getAllRegionIdentifiers( "UK" ) ;
   var len , i ;
   for( len = postcodes.length , i=0 ; i<len ; i++ ) {
     plotData[ postcodes[i] ] = 0 ;
