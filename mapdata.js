@@ -188,9 +188,9 @@ class MapData {
 
   }
 
-  getAllRegionIdentifiers( superregion ) {
-    //Just get the keys for the UK's path lines
-    return Object.keys( this.pathLinesText[ superregion ] ) ;
+  getAllRegionIdentifiers( superRegion ) {
+    //Just get the keys for the larger region's path lines
+    return Object.keys( this.pathLinesText[ superRegion ] ) ;
   }
 
   //For a given postcode, return the full path
