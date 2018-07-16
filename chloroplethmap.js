@@ -3,9 +3,11 @@
 const INPUT_BOX = document.querySelector( ".heatmap-input" ) ;
 const HEATMAP_DISPLAY = document.querySelector( "#heatmap-display" ) ;
 
-//A function to populate a plotData
-//object with the right postcodes for the UK
-//from a mapData object
+/*
+ * A function to populate a plotData
+ * object with the right postcodes for the UK
+ * from a mapData object
+ */
 function setupPostcodes( plotData , mapData ) {
   var postcodes = mapData.getAllRegionIdentifiers( "UK" ) ;
   var len , i ;
@@ -27,48 +29,50 @@ function locateFirstNumber( textString ) {
   return firstIndex ;
 }
 
-//Takes the raw input data, parses in
-//then adds the data to the plotData
+/*
+  * Takes the raw input data, parses in
+  * then adds the data to the plotData
+  */
 function parseTextData( dataIn , plotData ) {
   //Local copy of the input data
   //to do whatever we want with
-  var textData = String( dataIn ).replace( /\n/g , ";" ) ;
+  let textData = String( dataIn ).replace( /\n/g , ";" ) ;
   //Indices of points of interest in data
-  var startIndex, endIndex ;
+  let startIndex, endIndex ;
   //Temporary postcode and associated values
-  var postcode , value ;
+  let subregionCode , value ;
   //While there is another entry
   while( textData.search( ";" ) > 0 ) {
     /*
       Everything before the first comma
-      should be the postcode for the
+      should be the regionCode for the
       current entry
     */
     startIndex = textData.search( "," ) ;
-    postcode = textData.slice( 0 , startIndex ) ;
+    subregionCode = textData.slice( 0 , startIndex ) ;
     /*
       Find the first number in the string
       which will be just after the first
-      letters of the postcode
+      letters of the subregionCode
     */
-    endIndex = locateFirstNumber( postcode ) ;
-    //Get first letters of postcode
+    endIndex = locateFirstNumber( subregionCode ) ;
+    //Get first letters of subregionCode
     if( endIndex !== 100 ) {
-      postcode = postcode.slice( 0 , endIndex ) ;
+      subregionCode = subregionCode.slice( 0 , endIndex ) ;
     }
     /*
-      Convert it to upper case for
-      compatibility with inbuilt list
+     * Convert it to upper case for
+     * compatibility with inbuilt list
     */
-    postcode = postcode.toUpperCase() ;
+    subregionCode = subregionCode.toUpperCase() ;
     //Next, find the first semicolon
     endIndex = textData.search( ";" ) ;
     //Up to this is the value we want
-    //to add to this postcode region
+    //to add to this subregion
     value = textData.slice( startIndex+1 , endIndex ) ;
     //Add the value to the plotData
-    plotData[ postcode ] += Number( value ) ;
-    //Get rid of the postcode/value pair
+    plotData[ subregionCode ] += Number( value ) ;
+    //Get rid of the region/value pair
     //that was just read in
     textData = textData.slice( endIndex+1 ) ;
   }
