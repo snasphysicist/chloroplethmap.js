@@ -6,6 +6,9 @@ const HEATMAP_DISPLAY = document.querySelector( "#heatmap-display" ) ;
 //The map data
 var mapData = new MapData() ;
 
+//The colour map data
+var colourMap = new ColourMap() ;
+
 //The current super region, global variable
 var superRegion = "" ;
 
@@ -33,52 +36,48 @@ function locateFirstNumber( textString ) {
   return firstIndex ;
 }
 
-/*
-  * Takes the raw input data, parses in
-  * then adds the data to the plotData
-  */
+//Takes the raw input data, parses in
+//then adds the data to the plotData
 function parseTextData( dataIn , plotData ) {
   //Local copy of the input data
   //to do whatever we want with
-  let textData = String( dataIn ).replace( /\n/g , ";" ) ;
+  var textData = String( dataIn ).replace( /\n/g , ";" ) ;
   //Indices of points of interest in data
-  let startIndex, endIndex ;
+  var startIndex, endIndex ;
   //Temporary postcode and associated values
-  let subregionCode , value ;
+  var postcode , value ;
   //While there is another entry
   while( textData.search( ";" ) > 0 ) {
     /*
       Everything before the first comma
-      should be the subregion code for the
+      should be the postcode for the
       current entry
     */
     startIndex = textData.search( "," ) ;
-    subregionCode = textData.slice( 0 , startIndex ) ;
+    postcode = textData.slice( 0 , startIndex ) ;
     /*
       Find the first number in the string
       which will be just after the first
-      letters of the subregionCode
-      This is to account for, for example,
-      UK postcodes (CB1, PE13, etc...)
+      letters of the postcode
     */
-    endIndex = locateFirstNumber( subregionCode ) ;
-    //Get first letters of subregionCode
+    endIndex = locateFirstNumber( postcode ) ;
+    //Get first letters of postcode
     if( endIndex !== 100 ) {
-      subregionCode = subregionCode.slice( 0 , endIndex ) ;
+      postcode = postcode.slice( 0 , endIndex ) ;
     }
     /*
-     * Convert it to upper case for
-     * compatibility with inbuilt list
+      Convert it to upper case for
+      compatibility with inbuilt list
     */
-    subregionCode = subregionCode.toUpperCase() ;
+    postcode = postcode.toUpperCase() ;
     //Next, find the first semicolon
     endIndex = textData.search( ";" ) ;
     //Up to this is the value we want
-    //to add to this subregion
+    //to add to this postcode region
     value = textData.slice( startIndex+1 , endIndex ) ;
     //Add the value to the plotData
-    plotData[ subregionCode ] += Number( value ) ;
-    //Get rid of the region/value pair
+    plotData[ postcode ] += Number( value ) ;
+    //Get rid of the postcode/value pair
     //that was just read in
     textData = textData.slice( endIndex+1 ) ;
   }
@@ -112,7 +111,11 @@ function formatrgbString( rgbArray ) {
   return stringOut ;
 }
 
-function plotHeatMap() {
+/*
+ * Plot a chloropleth map based
+ * on the values the user has input
+ */
+function plotUserChloroplethMap() {
 
   //Create an object containing all of
   //the path and postcode data
@@ -127,7 +130,7 @@ function plotHeatMap() {
 
   //Setup an object with all the postcodes
   //but zero values next to them
-  setupPostcodes( plotData , mapData  ) ;
+  setupPostcodes( plotData , mapData ) ;
 
   //Grab the data from the input box
   var dataIn = INPUT_BOX.value ;
@@ -168,13 +171,66 @@ function plotHeatMap() {
 
 //Plot a chloropleth map with random data
 function plotRandomChloroplethMap() {
-  subRegionCodes = mapData.getAllSubregionIdentifiers( REGION_SELECTOR.value ) ;
-  for( key in subRegionCodes ) {
-    subRegionCodes[ key ] = Math.random() ;
-  }
-  console.log( subRegionCodes ) ;
+  /*
+   * Lazy way to work this:
+   * Have an empty string
+   * Get the list of subregions for selected superregion
+   * For each
+   * Get a random number 0 -> 1
+   * Add subregion's code,randomnumber; to the string
+   * call plotHeatMap with this string as inputdata
+   */
+
 }
 
+/*
+ * Will plot a heat map based on the
+ * values provided in the plotData
+ * input object
+ * Format: { "superregion" : string , "data" : object }
+ * Where string is "US", "UK", etc...
+ * object has format
+ *    { subRegionCode1 : value1 ,
+ *       subRegionCode2 : value2 , ... }
+ */
+
+function plotChloroplethMap( plotData ) {
+
+  let subRegionData = plotData[ "data" ] ;
+
+  //Minimum and maximum values
+  let extrema = getMinimumMaximum( subRegionData ) ;
+
+  //Rescale & get colours for each data point
+  for ( let subRegionCode in subRegionData ) {
+    subRegionData[ subRegionCode ] = ( subRegionData[ subRegionCode ] - extrema[0] ) / ( extrema[1] - extrema[0] ) ;
+    subRegionData[ subRegionCode ] = [ subRegionData[ subRegionCode ] ,
+        colourMap.getInterpolatedColour( subRegionData[ subRegionCode ] , "Heat Basic" ) ] ;
+  }
+
+  /*
+   * Add new paths to the SVG part of the page
+   * for each subregion
+   */
+  for ( let subRegionCode in subRegionData ) {
+    //Create the new path element
+    let addPath = document.createElementNS( "http://www.w3.org/2000/svg" , "path" ) ;
+    //Get the id for this postcode's path
+    addPath.setAttribute( "id" , subRegionCode ) ;
+    //Set the colours
+    addPath.setAttribute( "stroke" , "black" ) ;
+    addPath.setAttribute( "fill" , formatrgbString( subRegionData[ subRegionCode ][1] ) ) ;
+    //Set the points in the path from the map data
+    addPath.setAttribute( "d" , mapData.getRegionPath( superRegion , subRegionCode ) ) ;
+
+    //Push the new path into the SVG
+    HEATMAP_DISPLAY.appendChild( addPath ) ;
+  }
+
+  //Make the thing re-render
+  HEATMAP_DISPLAY.style.visibility = "hidden" ;
+  HEATMAP_DISPLAY.style.visibility = "visible " ;
+}
 
 
 

@@ -9,7 +9,7 @@
 //Add routine to generate heatmap
 //to "Generate" button
 const GENERATE_BUTTON = document.querySelector( ".heatmap-button" ) ;
-GENERATE_BUTTON.addEventListener( "click" , plotHeatMap ) ;
+GENERATE_BUTTON.addEventListener( "click" , plotUserChloroplethMap ) ;
 
 //Add display overlay
 //to copyright text at bottom
@@ -31,7 +31,7 @@ const REGION_SELECTOR = document.querySelector( "#super-region-selector" ) ;
 for( superRegion in mapData.getAllSuperregionIdentifiers() ) {
   //Create a new option element for each
   let newOption = document.createElement( "option" ) ;
-  newOption.setAttribute( "value" , mapData.getAllSuperregionIdentifiers()[ superRegion ].toLowerCase() ) ;
+  newOption.setAttribute( "value" , mapData.getAllSuperregionIdentifiers()[ superRegion ] ) ;
   newOption.innerHTML = mapData.getAllSuperregionIdentifiers()[ superRegion ] ;
   REGION_SELECTOR.appendChild( newOption ) ;
 }
