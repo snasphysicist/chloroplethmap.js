@@ -16,7 +16,7 @@
   <script src="./colourmap.js"></script>
 
   <div align="center">
-    <h1 class="heatmap-heading">UK Heat Map Generator</h1>
+    <h1 class="heatmap-heading">Chloropleth Map Generator</h1>
   </div>
 
   <!-- Main page content -->
@@ -25,9 +25,18 @@
     <div class="column">
 
       <div align="center">
+
         <p class="heatmap-text">
-          This is a tool to generate a heatmap of data based on UK postcodes. <br />
-          Enter your data in the below input box and hit the <i>Generate</i> button to get started. <br />
+          This is a tool to generate a chloropleth map of data based on different geographical areas. <br />
+          Select a region to get started.
+        </p>
+
+        <select id="super-region-selector">
+
+        </select>
+
+        <p class="heatmap-text">
+          Click the the <i>Generate</i> button to get started. <br />
           Data must be in one of the following formats: <br />
           <br />
           postcode1,value1;postcode1,value1; ... <br />
