@@ -49,7 +49,7 @@ function parseTextData( dataIn , plotData ) {
   while( textData.search( ";" ) > 0 ) {
     /*
       Everything before the first comma
-      should be the regionCode for the
+      should be the subregion code for the
       current entry
     */
     startIndex = textData.search( "," ) ;
@@ -58,6 +58,8 @@ function parseTextData( dataIn , plotData ) {
       Find the first number in the string
       which will be just after the first
       letters of the subregionCode
+      This is to account for, for example,
+      UK postcodes (CB1, PE13, etc...)
     */
     endIndex = locateFirstNumber( subregionCode ) ;
     //Get first letters of subregionCode
