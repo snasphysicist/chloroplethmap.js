@@ -3,13 +3,17 @@
 const INPUT_BOX = document.querySelector( ".heatmap-input" ) ;
 const HEATMAP_DISPLAY = document.querySelector( "#heatmap-display" ) ;
 
-/*
- * A function to populate a plotData
- * object with the right postcodes for the UK
- * from a mapData object
- */
+//The map data
+var mapData = new MapData() ;
+
+//The current super region, global variable
+var superRegion = "" ;
+
+//A function to populate a plotData
+//object with the right postcodes for the UK
+//from a mapData object
 function setupPostcodes( plotData , mapData ) {
-  var postcodes = mapData.getAllRegionIdentifiers( "UK" ) ;
+  var postcodes = mapData.getAllSubregionIdentifiers( "UK" ) ;
   var len , i ;
   for( len = postcodes.length , i=0 ; i<len ; i++ ) {
     plotData[ postcodes[i] ] = 0 ;
@@ -159,6 +163,16 @@ function plotHeatMap() {
   HEATMAP_DISPLAY.style.visibility = "visible " ;
 
 }
+
+//Plot a chloropleth map with random data
+function plotRandomChloroplethMap() {
+  subRegionCodes = mapData.getAllSubregionIdentifiers( REGION_SELECTOR.value ) ;
+  for( key in subRegionCodes ) {
+    subRegionCodes[ key ] = Math.random() ;
+  }
+  console.log( subRegionCodes ) ;
+}
+
 
 
 

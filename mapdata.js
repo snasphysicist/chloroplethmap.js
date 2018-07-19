@@ -188,9 +188,14 @@ class MapData {
 
   }
 
-  getAllRegionIdentifiers( superRegion ) {
+  getAllSubregionIdentifiers( superRegion ) {
     //Just get the keys for the larger region's path lines
     return Object.keys( this.pathLinesText[ superRegion ] ) ;
+  }
+
+  //Get all larger region names (UK, US, World, etc...)
+  getAllSuperregionIdentifiers() {
+    return Object.keys( this.pathLinesText ) ;
   }
 
   //For a given postcode, return the full path
