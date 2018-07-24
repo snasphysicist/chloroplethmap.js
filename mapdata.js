@@ -226,6 +226,8 @@ class MapData {
   * US, state letter codes (MA, AK, KY, etc)
   */
   getRegionPath( region , subregion ) {
+    console.log( region ) ;
+    console.log( subregion ) ;
     return this.pathLinesText[ region ][ subregion ] ;
   }
 
