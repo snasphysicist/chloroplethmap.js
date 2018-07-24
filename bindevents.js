@@ -40,9 +40,11 @@ for( superRegion in mapData.getAllSuperregionIdentifiers() ) {
  * Updates the value stored in the superRegion variable
  * (the currently selected superregion)
  * note: Depends on the superRegion varible from chloroplethmap.js
+ * note: Depends on the plotRandomChloroplethMap function from chloroplethmap.js
  */
 function updateSuperRegion() {
   superRegion = REGION_SELECTOR.value ;
+  plotRandomChloroplethMap() ;
 }
 //Run it once to ensure that the variable has the default value1
 updateSuperRegion() ;

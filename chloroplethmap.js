@@ -172,15 +172,28 @@ function plotUserChloroplethMap() {
 //Plot a chloropleth map with random data
 function plotRandomChloroplethMap() {
   /*
-   * Lazy way to work this:
-   * Have an empty string
-   * Get the list of subregions for selected superregion
-   * For each
-   * Get a random number 0 -> 1
-   * Add subregion's code,randomnumber; to the string
-   * call plotHeatMap with this string as inputdata
+   * For the selected superregion
+   * Get a list of subregions
+   * Get a random number 0 < r < 1
+   * Create plotData object in
+   * format described above plotChloroplethMap
    */
+   //Set superregion in plotData
+   let plotData = { "superregion" : superRegion } ;
+   //Empty object, to contain regions and random values
+   plotData[ "data" ] = {} ;
+   //Get list of subregions
+   let subRegions = mapData.getAllSubregionIdentifiers( superRegion ) ;
+   //Add random value with subregion key in plotData
+   for ( index in subRegions ) {
+     plotData[ "data" ][ subRegions[ index ] ] = Math.random() ;
+   }
+   plotChloroplethMap( plotData ) ;
+}
 
+//A function to clear the current chloropleth map
+function clearChloroplethMap() {
+  HEATMAP_DISPLAY.innerHTML = "" ;
 }
 
 /*
@@ -193,8 +206,10 @@ function plotRandomChloroplethMap() {
  *    { subRegionCode1 : value1 ,
  *       subRegionCode2 : value2 , ... }
  */
-
 function plotChloroplethMap( plotData ) {
+
+  //Clear existing map
+  clearChloroplethMap() ;
 
   let subRegionData = plotData[ "data" ] ;
 
