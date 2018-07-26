@@ -275,12 +275,11 @@ class MapData {
       //For each coordinate pair
       for( let index2 in coordinatePairs ) { //2
         //Get the x and y values
-        x = coordinatePairs[ index2 ].split( "," )[ 0 ] ;
-        y = coordinatePairs[ index2 ].split( "," )[ 1 ] ;
+        x = Number( coordinatePairs[ index2 ].split( "," )[ 0 ] ) ;
+        y = Number( coordinatePairs[ index2 ].split( "," )[ 1 ] ) ;
         //Check if they are smaller/larger than existing minimum/maximum
         if( x < xMin ) {
           xMin = x ;
-          console.log( x , xMin ) ;
         }
         if( x > xMax ) {
           xMax = x ;
