@@ -119,38 +119,38 @@ function plotUserChloroplethMap() {
 
   //Create an object containing all of
   //the path and postcode data
-  var mapData = new MapData ;
+  let mapData = new MapData ;
 
   //Create an object containing
   //all the colour map dataIn
-  var colourMap = new ColourMap ;
+  let colourMap = new ColourMap ;
 
   //The data that is to be plotted
-  var plotData = new Object ;
+  let plotData = new Object ;
 
   //Setup an object with all the postcodes
   //but zero values next to them
   setupPostcodes( plotData , mapData ) ;
 
   //Grab the data from the input box
-  var dataIn = INPUT_BOX.value ;
+  let dataIn = INPUT_BOX.value ;
 
   //Add the values to the plot data
   parseTextData( dataIn , plotData ) ;
 
-  var extrema = getMinimumMaximum( plotData ) ;
+  let extrema = getMinimumMaximum( plotData ) ;
 
   //Rescale & get colours for each data point
-  for ( var postcode in plotData ) {
+  for ( let postcode in plotData ) {
     plotData[ postcode ] = ( plotData[ postcode ] - extrema[0] ) / ( extrema[1] - extrema[0] ) ;
     plotData[ postcode ] = [ plotData[ postcode ] ,
         colourMap.getInterpolatedColour( plotData[ postcode ] , "Heat Basic" ) ] ;
   }
 
   //Add paths to the SVG for each postcode
-  for ( var postcode in plotData ) {
+  for ( let postcode in plotData ) {
     //Create the new path element
-    var addPath = document.createElementNS( "http://www.w3.org/2000/svg" , "path" ) ;
+    let addPath = document.createElementNS( "http://www.w3.org/2000/svg" , "path" ) ;
     //Get the id for this postcode's path
     addPath.setAttribute( "id" , mapData.getIdFromPostcode( postcode ) ) ;
     //Set the colours
@@ -241,6 +241,15 @@ function plotChloroplethMap( plotData ) {
     //Push the new path into the SVG
     HEATMAP_DISPLAY.appendChild( addPath ) ;
   }
+
+  //Calculate and set the viewBox for the map SVG
+  let viewBoxCoordinates = mapData.getBoundingBox( superRegion ) ;
+  let viewBoxAttribute = String( viewBoxCoordinates[ 0 ][ 0 ] ) ;
+  viewBoxAttribute += " " + viewBoxCoordinates[ 0 ][ 1 ] ;
+  viewBoxAttribute += " " + ( viewBoxCoordinates[ 1 ][ 0 ] - viewBoxCoordinates[ 0 ][ 0 ] )  ;
+  viewBoxAttribute += " " + ( viewBoxCoordinates[ 1 ][ 1 ] - viewBoxCoordinates[ 0 ][ 1 ] )  ;
+
+  HEATMAP_DISPLAY.setAttribute( "viewBox" , viewBoxAttribute ) ;
 
   //Make the thing re-render
   HEATMAP_DISPLAY.style.visibility = "hidden" ;
