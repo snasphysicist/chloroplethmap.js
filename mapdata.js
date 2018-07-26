@@ -236,7 +236,66 @@ class MapData {
    * and size for the map of the given region
    */
   getBoundingBox( region ) {
-
+    //Look for minimum and maximum in both directions
+    let x , y , xMin = null , xMax = null , yMin , yMax ;
+    //Individual pairs of x and y coordinates from the object
+    let coordinatePairs ;
+    //For each subregion in the superregion
+    for( let index in this.pathLinesText[ region ] ) { //1
+      /*
+       * Split the path into individual coordinate pairs
+       * plus some SVG drawing commands
+       */
+      coordinatePairs = this.pathLinesText[ region ][ index ].split( " " ) ;
+      /*
+       * Filter out the SVG drawing commands
+       * Array.filter() takes a function that returns true/false
+       * for element - true is kept, false is not
+       * Here an anonymous function is defined with the element as the argument
+       * This function matches M L or Z in the string, SVG drawing commands
+       * It does this via the regex /[MLZ]/g -> match M or L or Z
+       * The .match() will return null if there is no match
+       * otherwise it will return an non-null object
+       * So we only keep elements for which this match does return null
+       */
+      coordinatePairs = coordinatePairs.filter( function (x) { return x.match(/[MLZ]/g) === null ; }  ) ;
+      //Filter out empty strings
+      coordinatePairs = coordinatePairs.filter( function (x) { return x.length > 0 ; }  ) ;
+      /*
+       * Initialise minimum and maximum values
+       * Only if this hasn't yet been done
+       * We'll assume if one of these is null, all are null
+       */
+      if( xMin === null ) {
+        xMin = Number( coordinatePairs[ 0 ].split( "," )[ 0 ] ) ;
+        xMax = xMin ;
+        yMin = Number( coordinatePairs[ 0 ].split( "," )[ 1 ] ) ;
+        yMax = yMin ;
+      }
+      //For each coordinate pair
+      for( let index2 in coordinatePairs ) { //2
+        //Get the x and y values
+        x = coordinatePairs[ index2 ].split( "," )[ 0 ] ;
+        y = coordinatePairs[ index2 ].split( "," )[ 1 ] ;
+        //Check if they are smaller/larger than existing minimum/maximum
+        if( x < xMin ) {
+          xMin = x ;
+          console.log( x , xMin ) ;
+        }
+        if( x > xMax ) {
+          xMax = x ;
+        }
+        if( y < yMin ) {
+          yMin = y ;
+        }
+        if( y > yMax ) { //3
+          yMax = y ;
+        } //3
+      } //2
+    } //1
+    //Return coordinates of bottom left and top right of box
+    return [ [ xMin , yMin ] , [ xMax , yMax ] ] ;
   }
+
 
 }
