@@ -244,12 +244,29 @@ function plotChloroplethMap( plotData ) {
 
   //Calculate and set the viewBox for the map SVG
   let viewBoxCoordinates = mapData.getBoundingBox( superRegion ) ;
+  //x0
   let viewBoxAttribute = String( viewBoxCoordinates[ 0 ][ 0 ] ) ;
+  //y0
   viewBoxAttribute += " " + viewBoxCoordinates[ 0 ][ 1 ] ;
+  //x size
   viewBoxAttribute += " " + ( viewBoxCoordinates[ 1 ][ 0 ] - viewBoxCoordinates[ 0 ][ 0 ] )  ;
+  //y size
   viewBoxAttribute += " " + ( viewBoxCoordinates[ 1 ][ 1 ] - viewBoxCoordinates[ 0 ][ 1 ] )  ;
 
   HEATMAP_DISPLAY.setAttribute( "viewBox" , viewBoxAttribute ) ;
+
+  /*
+   * We might need to set a maximum width, to scale the height
+   * This is done if the SVG is bigger than the viewport height
+   */
+  let viewportHeight = document.documentElement.clientHeight ;
+  let svgHeight = ( viewBoxCoordinates[ 1 ][ 1 ] - viewBoxCoordinates[ 0 ][ 1 ] ) ;
+  if( viewportHeight < svgHeight ) {
+    let heightPercentage = Math.round( 120 * ( viewportHeight / svgHeight ) ) ;
+    HEATMAP_DISPLAY.setAttribute( "style" , "max-width:" + heightPercentage + "%" ) ;
+  } else {
+    HEATMAP_DISPLAY.removeAttribute( "style" ) ;
+  }
 
   //Make the thing re-render
   //HEATMAP_DISPLAY.style.visibility = "hidden" ;

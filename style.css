@@ -6,6 +6,10 @@ body {
   text-align : center ;
 }
 
+svg {
+  max-width : 100% ;
+}
+
 /* Columns side by side */
 
 .column-outer {
