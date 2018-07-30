@@ -15,27 +15,27 @@
   <script src="./mapdata.js"></script>
   <script src="./colourmap.js"></script>
 
-  <div align="center">
-    <h1 class="heatmap-heading">Chloropleth Map Generator</h1>
+  <div>
+    <h1>Chloropleth Map Generator</h1>
   </div>
 
   <!-- Main page content -->
-  <div class="row">
+  <div>
 
-    <div class="column">
+    <div>
 
-      <div align="center">
+      <div>
 
-        <p class="heatmap-text">
+        <p>
           This is a tool to generate a chloropleth map of data based on different geographical areas. <br />
           Select a region to get started.
         </p>
 
         <select id="super-region-selector">
-
+          <!-- Filled out dynamically by the initialisation js -->
         </select>
 
-        <p class="heatmap-text">
+        <p>
           Click the the <i>Generate</i> button to get started. <br />
           Data must be in one of the following formats: <br />
           <br />
@@ -49,27 +49,29 @@
         </p>
       </div>
 
-      <div align="center">
-        <textarea class="heatmap-input" cols="40" rows="5" name="inputdata"></textarea>
+      <div>
+        <textarea cols="40" rows="5" name="inputdata"></textarea>
       </div>
 
-      <div align="center">
-        <button class="heatmap-button">Generate</button>
+      <div>
+        <button>Generate</button>
       </div>
 
     </div>
 
-    <div class="column">
-      <svg id="heatmap-display" width="275" height="500" viewBox="550 0 0.01 1368.581"></svg>
+    <div>
+      <div>
+        <svg id="heatmap-display" viewBox="550 0 0.01 1368.581"></svg>
+      </div>
     </div>
 
   </div>
 
   <!-- Footer -->
-  <div class="row">
-    <div align="center">
+  <div>
+    <div>
       <!-- <p class="footer">Click here for copyright information</p> -->
-      <p class="footer">
+      <p>
         Show copyright information
       </p>
     </div>

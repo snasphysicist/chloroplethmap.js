@@ -252,8 +252,8 @@ function plotChloroplethMap( plotData ) {
   HEATMAP_DISPLAY.setAttribute( "viewBox" , viewBoxAttribute ) ;
 
   //Make the thing re-render
-  HEATMAP_DISPLAY.style.visibility = "hidden" ;
-  HEATMAP_DISPLAY.style.visibility = "visible " ;
+  //HEATMAP_DISPLAY.style.visibility = "hidden" ;
+  //HEATMAP_DISPLAY.style.visibility = "visible " ;
 }
 
 
