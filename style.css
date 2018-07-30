@@ -1,4 +1,26 @@
 
+/* Global styles */
+
+body {
+  font-family : Lato ;
+  text-align : center ;
+}
+
+/* Columns side by side */
+
+.column-outer {
+  width : 50% ;
+  float : left ;
+  min-height : 500px ;
+}
+
+/* Buttons on own line */
+.button {
+  display : block ;
+  margin : auto ;
+}
+
+/* Modal styles */
 
 .modal-outer{
   display: none ;

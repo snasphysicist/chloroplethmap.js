@@ -20,11 +20,7 @@
   </div>
 
   <!-- Main page content -->
-  <div>
-
-    <div>
-
-      <div>
+    <div class="column-outer"> <!-- Column 1 Start -->
 
         <p>
           This is a tool to generate a chloropleth map of data based on different geographical areas. <br />
@@ -47,25 +43,18 @@
           postcode2,value2<br />
           ...
         </p>
-      </div>
 
-      <div>
         <textarea cols="40" rows="5" name="inputdata"></textarea>
-      </div>
 
-      <div>
-        <button id="generate-button">Generate</button>
-      </div>
+        <button id="generate-button" class="button">Generate</button>
 
-    </div>
+    </div> <!-- Column 1 End -->
 
-    <div>
-      <div>
+    <div class="column-outer"> <!-- Column 2 Start -->
+      <div class="column-inner">
         <svg id="heatmap-display" viewBox="550 0 0.01 1368.581"></svg>
       </div>
-    </div>
-
-  </div>
+    </div> <!-- Column 2 End -->
 
   <!-- Footer -->
   <div>
