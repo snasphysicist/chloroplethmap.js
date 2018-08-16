@@ -262,7 +262,7 @@ function plotChloroplethMap( plotData ) {
   let viewportHeight = document.documentElement.clientHeight ;
   let svgHeight = ( viewBoxCoordinates[ 1 ][ 1 ] - viewBoxCoordinates[ 0 ][ 1 ] ) ;
   if( viewportHeight < svgHeight ) {
-    let heightPercentage = Math.round( 120 * ( viewportHeight / svgHeight ) ) ;
+    let heightPercentage = Math.round( 80 * ( viewportHeight / svgHeight ) ) ;
     HEATMAP_DISPLAY.setAttribute( "style" , "max-width:" + heightPercentage + "%" ) ;
   } else {
     HEATMAP_DISPLAY.removeAttribute( "style" ) ;
