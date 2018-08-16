@@ -1,42 +1,30 @@
 
+/* Global styles */
+
 body {
-  margin: 20;
-  background-color: rgb( 255 , 255 , 255 ) ;
+  font-family : Lato ;
+  text-align : center ;
 }
 
-.footer{
-  font-family: 'Lato Light', sans-serif ;
-  font-size: 10px ;
+svg {
+  max-width : 100% ;
 }
 
-.heatmap-heading{
-   font-family: 'Lato', sans-serif ;
+/* Columns side by side */
+
+.column-outer {
+  width : 50% ;
+  float : left ;
+  min-height : 500px ;
 }
 
-.heatmap-text{
-   font-family: 'Lato', sans-serif ;
+/* Buttons on own line */
+.button {
+  display : block ;
+  margin : auto ;
 }
 
-.heatmap-input{
-   font-family: 'Lato', sans-serif ;
-}
-
-.heatmap-button{
-   font-family: 'Lato', sans-serif ;
-}
-
-.close-button{
-   font-family: 'Lato', sans-serif ;
-}
-
-.row{
-  display: flex ;
-  justify-content: center ;
-}
-
-.column{
-  flex: 50% ;
-}
+/* Modal styles */
 
 .modal-outer{
   display: none ;
