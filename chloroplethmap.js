@@ -131,13 +131,17 @@ function plotUserChloroplethMap() {
   //Empty object, to contain regions and calculated values
   plotData[ "data" ] = {} ;
 
+  let subRegions = mapData.getAllSubregionIdentifiers( superRegion ) ;
+
+  for( let index in subRegions ) {
+    plotData[ "data" ][ subRegions[ index ] ] = 0 ;
+  }
+
   //Grab the data from the input box
   let dataIn = INPUT_BOX.value ;
 
   //Add the values to the plot data
   parseTextData( dataIn , plotData[ "data" ] ) ;
-
-  console.log( plotData ) ;
 
   let extrema = getMinimumMaximum( plotData ) ;
 
