@@ -143,7 +143,9 @@ function plotUserChloroplethMap() {
   //Add the values to the plot data
   parseTextData( dataIn , plotData[ "data" ] ) ;
 
-  let extrema = getMinimumMaximum( plotData ) ;
+  let extrema = getMinimumMaximum( plotData[ "data" ] ) ;
+
+  console.log( extrema ) ;
 
   //Rescale & get colours for each data point
   for ( let postcode in plotData ) {
