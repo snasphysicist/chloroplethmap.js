@@ -126,17 +126,18 @@ function plotUserChloroplethMap() {
   let colourMap = new ColourMap ;
 
   //The data that is to be plotted
-  let plotData = new Object ;
-
-  //Setup an object with all the postcodes
-  //but zero values next to them
-  setupPostcodes( plotData , mapData ) ;
+  //Set superregion in plotData
+  let plotData = { "superregion" : superRegion } ;
+  //Empty object, to contain regions and calculated values
+  plotData[ "data" ] = {} ;
 
   //Grab the data from the input box
   let dataIn = INPUT_BOX.value ;
 
   //Add the values to the plot data
-  parseTextData( dataIn , plotData ) ;
+  parseTextData( dataIn , plotData[ "data" ] ) ;
+
+  console.log( plotData ) ;
 
   let extrema = getMinimumMaximum( plotData ) ;
 
