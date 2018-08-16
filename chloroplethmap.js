@@ -1,6 +1,6 @@
 
 //UI Elements
-const INPUT_BOX = document.querySelector( ".heatmap-input" ) ;
+const INPUT_BOX = document.querySelector( "#data-input" ) ;
 const HEATMAP_DISPLAY = document.querySelector( "#heatmap-display" ) ;
 
 //The map data
