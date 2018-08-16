@@ -145,34 +145,7 @@ function plotUserChloroplethMap() {
 
   let extrema = getMinimumMaximum( plotData[ "data" ] ) ;
 
-  console.log( extrema ) ;
-
-  //Rescale & get colours for each data point
-  for ( let postcode in plotData ) {
-    plotData[ postcode ] = ( plotData[ postcode ] - extrema[0] ) / ( extrema[1] - extrema[0] ) ;
-    plotData[ postcode ] = [ plotData[ postcode ] ,
-        colourMap.getInterpolatedColour( plotData[ postcode ] , "Heat Basic" ) ] ;
-  }
-
-  //Add paths to the SVG for each postcode
-  for ( let postcode in plotData ) {
-    //Create the new path element
-    let addPath = document.createElementNS( "http://www.w3.org/2000/svg" , "path" ) ;
-    //Get the id for this postcode's path
-    addPath.setAttribute( "id" , mapData.getIdFromPostcode( postcode ) ) ;
-    //Set the colours
-    addPath.setAttribute( "stroke" , "black" ) ;
-    addPath.setAttribute( "fill" , formatrgbString( plotData[ postcode ][1] ) ) ;
-    //Set the points in the path from the map data
-    addPath.setAttribute( "d" , mapData.getPointsFromPostcode( postcode ) ) ;
-
-    //Push the new path into the SVG
-    HEATMAP_DISPLAY.appendChild( addPath ) ;
-  }
-
-  //Make the thing re-render
-  HEATMAP_DISPLAY.style.visibility = "hidden" ;
-  HEATMAP_DISPLAY.style.visibility = "visible " ;
+  plotChloroplethMap( plotData ) ;
 
 }
 
