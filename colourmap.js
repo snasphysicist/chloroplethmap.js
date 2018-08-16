@@ -31,7 +31,7 @@ class ColourMap {
 
     //RGB components to be returned
     var rgb = [] ;
-
+    
     //For r, g, b calculate the component
     for( var i=0 ; i<3 ; i++ ) {
       rgb.push( colourMap[lowerIndex+1][i]*(1-remainder) + colourMap[lowerIndex][i]*remainder ) ;

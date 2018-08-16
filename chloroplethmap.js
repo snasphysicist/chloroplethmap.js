@@ -126,46 +126,26 @@ function plotUserChloroplethMap() {
   let colourMap = new ColourMap ;
 
   //The data that is to be plotted
-  let plotData = new Object ;
+  //Set superregion in plotData
+  let plotData = { "superregion" : superRegion } ;
+  //Empty object, to contain regions and calculated values
+  plotData[ "data" ] = {} ;
 
-  //Setup an object with all the postcodes
-  //but zero values next to them
-  setupPostcodes( plotData , mapData ) ;
+  let subRegions = mapData.getAllSubregionIdentifiers( superRegion ) ;
+
+  for( let index in subRegions ) {
+    plotData[ "data" ][ subRegions[ index ] ] = 0 ;
+  }
 
   //Grab the data from the input box
   let dataIn = INPUT_BOX.value ;
 
   //Add the values to the plot data
-  parseTextData( dataIn , plotData ) ;
+  parseTextData( dataIn , plotData[ "data" ] ) ;
 
-  let extrema = getMinimumMaximum( plotData ) ;
+  let extrema = getMinimumMaximum( plotData[ "data" ] ) ;
 
-  //Rescale & get colours for each data point
-  for ( let postcode in plotData ) {
-    plotData[ postcode ] = ( plotData[ postcode ] - extrema[0] ) / ( extrema[1] - extrema[0] ) ;
-    plotData[ postcode ] = [ plotData[ postcode ] ,
-        colourMap.getInterpolatedColour( plotData[ postcode ] , "Heat Basic" ) ] ;
-  }
-
-  //Add paths to the SVG for each postcode
-  for ( let postcode in plotData ) {
-    //Create the new path element
-    let addPath = document.createElementNS( "http://www.w3.org/2000/svg" , "path" ) ;
-    //Get the id for this postcode's path
-    addPath.setAttribute( "id" , mapData.getIdFromPostcode( postcode ) ) ;
-    //Set the colours
-    addPath.setAttribute( "stroke" , "black" ) ;
-    addPath.setAttribute( "fill" , formatrgbString( plotData[ postcode ][1] ) ) ;
-    //Set the points in the path from the map data
-    addPath.setAttribute( "d" , mapData.getPointsFromPostcode( postcode ) ) ;
-
-    //Push the new path into the SVG
-    HEATMAP_DISPLAY.appendChild( addPath ) ;
-  }
-
-  //Make the thing re-render
-  HEATMAP_DISPLAY.style.visibility = "hidden" ;
-  HEATMAP_DISPLAY.style.visibility = "visible " ;
+  plotChloroplethMap( plotData ) ;
 
 }
 
